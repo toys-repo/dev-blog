@@ -1,5 +1,3 @@
-'use client';
-
 interface MainProps {
   children: React.ReactNode;
 }
