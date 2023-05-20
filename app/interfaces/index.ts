@@ -5,3 +5,8 @@ export interface INavItem {
   label: string;
   icon?: IconType;
 }
+
+export interface ITimeUnit {
+  timeUnit: Intl.RelativeTimeFormatUnit;
+  inMilliseconds: number;
+}
