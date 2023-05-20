@@ -21,15 +21,7 @@ export interface IPost {
   readingTime: string;
 }
 
-export interface IPostsRes {
-  posts: IPost[];
-}
-
 export interface ICategory {
   name: string;
   postCount: number;
-}
-
-export interface ICategoryRes {
-  categories: ICategory[];
 }
