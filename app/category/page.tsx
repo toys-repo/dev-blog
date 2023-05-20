@@ -1,4 +1,4 @@
-import PostService from '@app/services';
+import BlogService from '@app/services';
 
 import Container from '@components/Container';
 import CategoryList from '@components/category/CategoryList';
@@ -11,29 +11,40 @@ export const metadata = {
   description: 'Category',
 };
 
-export const getData = async () => {
-  const categories = await PostService.getCategories();
-  const posts = await PostService.getPosts();
-  return {
-    categories,
-    posts,
-  };
+const getCategoriesAndPosts = async () => {
+  try {
+    const categories = await BlogService.getCategories();
+    const posts = await BlogService.getPosts();
+    return {
+      categories,
+      posts,
+      hasError: false,
+    };
+  } catch (e) {
+    return {
+      categories: [],
+      posts: [],
+      hasError: true,
+    };
+  }
 };
 
 const Category = async () => {
-  const { categories, posts } = await getData();
+  const { categories, posts, hasError } = await getCategoriesAndPosts();
 
   return (
     <Container maxWidth="md">
-      {categories.length === 0 ? (
-        <MessageBox message="There is no category." />
-      ) : (
-        <>
-          <CategoryList categories={categories} />
-          <LineSeparator />
-          <PostCardList posts={posts} />
-        </>
-      )}
+      {hasError && <MessageBox message="Oops!! Server error is occurred." />}
+      {!hasError &&
+        (categories.length === 0 ? (
+          <MessageBox message="There is no category." />
+        ) : (
+          <>
+            <CategoryList categories={categories} />
+            <LineSeparator />
+            <PostCardList posts={posts} />
+          </>
+        ))}
     </Container>
   );
 };
