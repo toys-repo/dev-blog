@@ -20,3 +20,8 @@ export interface IPost {
   createdAt: string;
   readingTime: string;
 }
+
+export interface ICategory {
+  name: string;
+  postCount: number;
+}
