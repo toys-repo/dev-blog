@@ -17,7 +17,7 @@ const MenuNavItem = ({ navItem }: MenuNavItemProps) => {
   return (
     <Link
       href={href}
-      className={`min-w-fit px-2 h-8 flex flex-row items-center gap-2 border-b last:border-b-0 border-b-neutral-300 hover:bg-neutral-100 transition-color`}
+      className={`w-full h-8 px-2 flex flex-row items-center gap-2 border-b last:border-b-0 border-b-neutral-300 hover:bg-neutral-100 first:rounded-t-md last:rounded-b-md transition-color`}
     >
       {Icon && <Icon size={16} className={`${isActive ? 'text-blue-500' : 'text-black'}`} />}
       <span className={`text-sm ${isActive ? 'text-blue-500' : 'text-black'}`}>{label}</span>
