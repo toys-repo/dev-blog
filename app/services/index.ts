@@ -2,8 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-import { IPost, ICategory } from '@app/interfaces';
-import { CategoryStats } from '@app/types';
+import { IPost, ICategory, ISeries } from '@app/interfaces';
+import { CategoryStats, SeriesStats } from '@app/types';
 
 class BlogService {
   private static ROOT_DIR = path.join(process.cwd(), 'public');
@@ -41,6 +41,28 @@ class BlogService {
       categories.push({ name, postCount });
       return categories;
     }, [] as ICategory[]);
+  };
+
+  static getSeries = async () => {
+    const mdFilePaths = this.findMdFilePaths(this.POST_DIR);
+    const seriesStats = mdFilePaths.reduce((seriesStats, mdFilePath) => {
+      const mdFile = fs.readFileSync(mdFilePath);
+      const {
+        data: { title, series, createdAt },
+      } = matter(mdFile);
+      if (series) {
+        seriesStats[series] = seriesStats[series]
+          ? seriesStats[series].concat({ title, createdAt })
+          : [{ title, createdAt }];
+      }
+      return seriesStats;
+    }, {} as SeriesStats);
+    return Object.entries(seriesStats).reduce((series, [name, posts]) => {
+      const sortedPostSummaries = posts.sort(
+        (postA, postB) => new Date(postA.createdAt).getTime() - new Date(postB.createdAt).getTime()
+      );
+      return series.concat({ name, postSummaries: sortedPostSummaries });
+    }, [] as ISeries[]);
   };
 
   private static findMdFilePaths = (dir: string) => {

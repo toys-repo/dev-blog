@@ -1,4 +1,5 @@
 import { IconType } from 'react-icons';
+import { PostSummary } from '@app/types';
 
 export interface INavItem {
   href: string;
@@ -21,15 +22,12 @@ export interface IPost {
   readingTime: string;
 }
 
-export interface IPostsRes {
-  posts: IPost[];
-}
-
 export interface ICategory {
   name: string;
   postCount: number;
 }
 
-export interface ICategoryRes {
-  categories: ICategory[];
+export interface ISeries {
+  name: string;
+  postSummaries: PostSummary[];
 }
