@@ -9,7 +9,7 @@ interface PostMetadataProps {
 
 const PostMetadata = ({ icon: Icon, metadata }: PostMetadataProps) => {
   return (
-    <div className="w-fit h-fit flex items-center text-neutral-600 text-sm gap-0.5">
+    <div className="w-fit h-fit flex items-center text-neutral-600 text-sm gap-0.5 shrink-0">
       {Icon && <Icon size={16} />}
       <Text variant="span">{metadata}</Text>
     </div>
