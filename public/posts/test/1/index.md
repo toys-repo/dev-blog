@@ -1,7 +1,7 @@
 ---
 title: 테스트 마크다운 파일
 category: 테스트
-series:
+series: 테스트
 thumbnailPath: test.png
 createdAt: 2023-01-01
 readingTime: 1m
