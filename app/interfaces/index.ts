@@ -31,3 +31,7 @@ export interface ISeries {
   name: string;
   postSummaries: PostSummary[];
 }
+
+export interface IParams {
+  slug?: string;
+}
